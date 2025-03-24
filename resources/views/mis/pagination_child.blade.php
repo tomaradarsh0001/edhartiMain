@@ -66,7 +66,7 @@
 		<td>
 			@foreach($propertyDetail->splitedPropertyDetail as $key => $chldProperty)
 				<p>
-					<a href="{{ url('property-details/child/' . $chldProperty->id) }}">{{$chldProperty->child_prop_id}}</a>
+					<a href="{{ route('propertyChildDetails', ['id' => $chldProperty->id]) }}">{{$chldProperty->child_prop_id}}</a>
 					@if(!empty($chldProperty->old_property_id))
 						<span class="text-secondary">({{$chldProperty->old_property_id}})</span>
 					@endif
@@ -116,12 +116,15 @@
 		</td>
 		<td>
 			<div class="d-flex gap-3">
-				<a href="{{ url('property-details/' . $propertyDetail->id . '/view') }}""> <button type=" button"
-					class="btn btn-success px-5">View</button></a>
+				<a href="{{ route('viewDetails', ['property' => $propertyDetail->id]) }}">
+					<button type="button" class="btn btn-success px-5">View</button>
+				</a>
+				
 				@haspermission('edit.property.details')
-				<a href="{{ url('property-details/' . $propertyDetail->id . '/edit') }}"><button type="button"
-						class="btn btn-primary px-5">Edit</button></a>
-				@endhaspermission
+				<a href="{{ route('editDetails', ['property' => $propertyDetail->id]) }}">
+					<button type="button" class="btn btn-primary px-5">Edit</button>
+				</a>
+				@endhaspermission				
 				@haspermission('delete.property.details')
 				<button type=" button" data-bs-toggle="modal" data-bs-target="#deleteProperty_{{$propertyDetail->id}}"
 					class="btn btn-danger px-5">Delete</button>

@@ -9,7 +9,7 @@
                     <div class="card-body">
                     <div class="d-flex justify-content-end">
                     @haspermission('create permission')
-                        <a href="{{ url('permissions/create') }}"><button class="btn btn-primary">+ Add Permission</button></a>
+                        <a href="{{ route('permissions.create')  }}"><button class="btn btn-primary">+ Add Permission</button></a>
                     @endhaspermission
                     </div>
                         <h6 class="mb-0 text-uppercase tabular-record_font pb-4">Permissons</h6>
@@ -28,14 +28,21 @@
 											<td>{{$permission->name}}</td>
 											<td>
                                                 <div class="d-flex gap-3">
-                                                @haspermission('update permission')
-                                                    <a href="{{ url('permissions/'.$permission->id.'/edit') }}"><button type="button" class="btn btn-primary px-5">Edit</button></a>
-                                                @endhaspermission
+                                                    @haspermission('update permission')
+                                                        <a href="{{ route('permissions.edit', $permission->id) }}">
+                                                            <button type="button" class="btn btn-primary px-5">Edit</button>
+                                                        </a>
+                                                    @endhaspermission
                                                 
-                                                @haspermission('delete permission')
-                                                    <a href="{{ url('permissions/'.$permission->id.'/delete') }}"> <button type="button" class="btn btn-danger px-5">Delete</button></a>
-                                                @endhaspermission
+                                                    @haspermission('delete permission')
+                                                        <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this permission?');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger px-5">Delete</button>
+                                                        </form>
+                                                    @endhaspermission
                                                 </div>
+                                                
                                             </td>
 										</tr>
 										@endforeach

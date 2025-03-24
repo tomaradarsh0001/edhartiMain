@@ -56,7 +56,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content py-3">
-                <a href="{{ url('logistic/items/add') }}">
+                <a href="{{ route('logistic.create') }}">
                     <button type="button" class="btn btn-primary py-2">+ Add Items</button>
                 </a>
             </div>

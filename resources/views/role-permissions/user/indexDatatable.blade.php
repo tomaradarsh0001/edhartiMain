@@ -39,15 +39,18 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex pb-5 justify-content-between">
-                        <a href="{{ url('users/create') }}"><button class="btn btn-primary">+ Add User</button></a>
+                        <a href="{{ route('users.create') }}" class="btn btn-primary">+ Add User</a>
+
                         <div class="d-flex gap-3">
                             @haspermission('view role')
-                                <a href="{{ url('roles') }}"><button class="btn btn-info">Roles</button></a>
+                                <a href="{{ route('roles.index') }}" class="btn btn-info">Roles</a>
                             @endhaspermission
+                        
                             @haspermission('view permission')
-                                <a href="{{ url('permissions') }}"><button class="btn btn-warning">Permissions</button></a>
+                                <a href="{{ route('permissions.index') }}" class="btn btn-warning">Permissions</a>
                             @endhaspermission
                         </div>
+                        
                     </div>
                     <h6 class="mb-0 text-uppercase tabular-record_font pb-4">Users</h6>
                     <table id="example" class="display nowrap" style="width:100%">

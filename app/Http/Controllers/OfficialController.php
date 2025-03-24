@@ -265,14 +265,14 @@ class OfficialController extends Controller
                                         ->setTimezone('Asia/Kolkata')
                                         ->format('d M Y H:i:s');
             if ($user->roles[0]['name'] == 'it-cell') {
-                $actionBtnHtml .= '<a href="' . url('register/user/' . $getRegistrationDetail->id . '/view/details') . '">
+            $actionBtnHtml .= '<a href="' . route('register.user.view.details', ['id' => $getRegistrationDetail->id]) . '">
                 <button type="button" class="btn btn-success px-5">View</button>
                 </a>';
                 //if ($getRegistrationDetail->is_property_flat === 1) {  //Commented this condition to handle the transfer case of normal property -- Amita [27-02-2025]
                     $actionBtnHtml .= '<button type="button" class="btn btn-primary open-modal-btn" data-bs-toggle="modal" data-bs-target="#transferPropertyModel" data-user-id="'.$getRegistrationDetail->id.'">Transfer</button>';    
                 //}
             } else {
-                $actionBtnHtml .= '<a href="' . url('register/user/' . $getRegistrationDetail->id . '/view') . '">
+            $actionBtnHtml .= '<a href="' . route('register.user.details', ['id' => $getRegistrationDetail->id]) . '">
                 <button type="button" class="btn btn-success px-5">View</button>
             </a>';
             }
@@ -903,14 +903,15 @@ class OfficialController extends Controller
             $nestedData['status'] = '<span class="highlight_value ' . $class . '">' . ucwords($getNewPropertyDetail->item_name) . '</span>';
             $nestedData['created_at'] = $getNewPropertyDetail->created_at->format('Y-m-d H:i:s');
             if ($user->roles[0]['name'] == 'it-cell') {
-                $nestedData['action'] = '<a href="' . url('applicant/property/' . $getNewPropertyDetail->id . '/view/details') . '">
-                <button type="button" class="btn btn-success px-5">View</button>
-            </a>';
+                $nestedData['action'] = '<a href="' . route('applicant.properties.view.details', ['id' => $getNewPropertyDetail->id]) . '">
+                                            <button type="button" class="btn btn-success px-5">View</button>
+                                        </a>';
             } else {
-                $nestedData['action'] = '<a href="' . url('applicant/property/' . $getNewPropertyDetail->id . '/view') . '">
-                <button type="button" class="btn btn-success px-5">View</button>
-            </a>';
+                $nestedData['action'] = '<a href="' . route('applicant.properties.details', ['id' => $getNewPropertyDetail->id]) . '">
+                                            <button type="button" class="btn btn-success px-5">View</button>
+                                        </a>';
             }
+            
 
             $data[] = $nestedData;
         }
@@ -1564,7 +1565,7 @@ class OfficialController extends Controller
             if (auth()->user()->can('section.property.mis.update.request') && !empty($getUpdatedProperty->remarks) && empty($getUpdatedProperty->permission_by)) {
                 $action .= '<button type="button" class="btn btn-primary px-5 edit-permission-btn" data-bs-toggle="modal" data-bs-target="#editPermissionModal" data-section-mis-history-id="' . $getUpdatedProperty->id . '" data-service-type="' . $getUpdatedProperty->service_type . '" data-model-id="' . $getUpdatedProperty->model_id . '">Allow Edit</button>';
             }
-            $action .= '<a href="' . url('users/' . $getUpdatedProperty->id . '/delete') . '"><button type="button" class="btn btn-secondary px-5">Archive</button></a></div>';
+            $action .= '<a href="' . route('users/' . $getUpdatedProperty->id . '/delete') . '"><button type="button" class="btn btn-secondary px-5">Archive</button></a></div>';
 
             $nestedData['action'] = $action;
             $data[] = $nestedData;
@@ -1691,7 +1692,7 @@ class OfficialController extends Controller
                 }
                 $action .= '<button type="button" ' . $disabledAllowEditButton . ' class="btn btn-primary px-5 edit-permission-btn" data-bs-toggle="modal" data-bs-target="#editPermissionModal" data-section-mis-history-id="' . $getUpdatedProperty->id . '" data-service-type="' . $getUpdatedProperty->service_type . '" data-model-id="' . $getUpdatedProperty->model_id . '">Allow Edit</button>';
             }
-            // $action .= '<a href="' . url('users/' . $getUpdatedProperty->id . '/delete') . '"><button type="button" class="btn btn-secondary px-5">Archive</button></a></div>';
+            // $action .= '<a href="' . route('users/' . $getUpdatedProperty->id . '/delete') . '"><button type="button" class="btn btn-secondary px-5">Archive</button></a></div>';
             $action .= '<a href="#"><button type="button" class="btn btn-secondary px-5">Archive</button></a></div>';
             $nestedData['action'] = $action;
             $data[] = $nestedData;
@@ -2231,15 +2232,16 @@ class OfficialController extends Controller
             $nestedData['present_occupant_name'] = $flat->present_occupant_name;
             $actionHTML = '';
             if (Auth::user()->can('view.flat')) {
-                $actionHTML .= '<a href="' . url('flat/' . $flat->id . '/view') . '">
-                    <button type="button" class="btn btn-success px-5">View</button>
-                </a>';
+                $actionHTML .= '<a href="' . route('viewFlatDetails', ['id' => $flat->id]) . '">
+                                    <button type="button" class="btn btn-success px-5">View</button>
+                                </a>';
             }
+            
             if (Auth::user()->can('edit.flat')) {
-                $actionHTML .= '<a href="' . url('flat/' . $flat->id . '/edit') . '">
-                    <button type="button" class="btn btn-primary px-5">Edit</button>
-                </a>';
-            }
+                $actionHTML .= '<a href="' . route('editFlatDetails', ['id' => $flat->id]) . '">
+                                    <button type="button" class="btn btn-primary px-5">Edit</button>
+                                </a>';
+            }            
             if (Auth::user()->can('delete.flat')) {
                 $actionHTML .= '<button type="button" class="btn btn-danger px-5 delete-btn" data-id="' . $flat->id . '" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>';
             }

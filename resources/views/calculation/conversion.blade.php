@@ -124,7 +124,7 @@
             }
             $.ajax({
                 type: 'get',
-                url: "{{url('conversion/charges-for-property')}}",
+                url: "{{ route('chargesForProperty') }}",
                 data: {
                     propertyId: propertyId,
                     lesseType: lesseType

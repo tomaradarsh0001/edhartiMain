@@ -118,13 +118,13 @@ class UserController extends Controller
             // Actions
             $action = '<div class="d-flex gap-3">';
             if (auth()->user()->can('update user')) {
-                $action .= '<a href="' . url('users/' . $row->id . '/update-user-details') . '"><button type="button" class="btn btn-primary px-5">Edit</button></a>';
+                $action .= '<a href="' . route('users/' . $row->id . '/update-user-details') . '"><button type="button" class="btn btn-primary px-5">Edit</button></a>';
             }
             if (auth()->user()->can('update.user.roles.permissions')) {
-                $action .= '<a href="' . url('users/' . $row->id . '/edit') . '"><button type="button" class="btn btn-success px-5">Edit Roles / Permissions </button></a>';
+                $action .= '<a href="' . route('users/' . $row->id . '/edit') . '"><button type="button" class="btn btn-success px-5">Edit Roles / Permissions </button></a>';
             }
             if (auth()->user()->can('delete user')) {
-                $action .= '<a href="' . url('users/' . $row->id . '/delete') . '"><button type="button" class="btn btn-danger px-5">Delete</button></a>';
+                $action .= '<a href="' . route('users/' . $row->id . '/delete') . '"><button type="button" class="btn btn-danger px-5">Delete</button></a>';
             }
             $action .= '</div>';
             $nestedData['action'] = $action;
@@ -216,27 +216,25 @@ class UserController extends Controller
             }
             $nestedData['roles'] = $roles;
 
-            // Prepare actions
-            // $action = '<div class="d-flex gap-3">';
-            // if (auth()->user()->can('update user')) {
-            //     $action .= '<a href="' . url('users/' . $row->id . '/edit') . '"><button type="button" class="btn btn-primary px-5">Edit</button></a>';
-            // }
-            // if (auth()->user()->can('delete user')) {
-            //     $action .= '<a href="' . url('users/' . $row->id . '/delete') . '"><button type="button" class="btn btn-danger px-5">Delete</button></a>';
-            // }
-            // $action .= '</div>';
-            // $nestedData['action'] = $action;
-            // Actions
+        
             $action = '<div class="d-flex gap-3">';
             if (auth()->user()->can('update user')) {
-                $action .= '<a href="' . url('users/' . $row->id . '/update-user-details') . '"><button type="button" class="btn btn-primary px-5">Edit</button></a>';
+                $action .= '<a href="' . route('user.details.update', ['id' => $row->id]) . '">
+                                <button type="button" class="btn btn-primary px-5">Edit</button>
+                            </a>';
             }
+            
             if (auth()->user()->can('update.user.roles.permissions')) {
-                $action .= '<a href="' . url('users/' . $row->id . '/edit') . '"><button type="button" class="btn btn-success px-5">Edit Roles / Permissions </button></a>';
+                $action .= '<a href="' . route('user.edit', ['id' => $row->id]) . '">
+                                <button type="button" class="btn btn-success px-5">Edit Roles / Permissions</button>
+                            </a>';
             }
+            
             if (auth()->user()->can('delete user')) {
-                $action .= '<a href="' . url('users/' . $row->id . '/delete') . '"><button type="button" class="btn btn-danger px-5">Delete</button></a>';
-            }
+                $action .= '<a href="' . route('user.delete', ['userId' => $row->id]) . '">
+                                <button type="button" class="btn btn-danger px-5">Delete</button>
+                            </a>';
+            }            
             $action .= '</div>';
             $nestedData['action'] = $action;
 
@@ -346,8 +344,9 @@ class UserController extends Controller
         }
     }
 
-    public function edit(User $user)
+    public function edit($id)
     {
+        $user = User::find($id);
         $roles = Role::pluck('name', 'name')->all();
         $userRoles = $user->roles->pluck('name', 'name')->all();
         // Lalit 11/07/2024 :- Get all permissions to display permission dropdown on edit page

@@ -68,7 +68,7 @@ class SupplierVendorDetailsController extends Controller
     // Return a JSON response for AJAX handling
     return response()->json([
         'message' => 'Vendor created successfully!',
-        'redirect_url' => url('logistic/vendor') // You can redirect after success
+        'redirect_url' => route('supplier.index') // Redirect after success
     ], 200);
 
     }

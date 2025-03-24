@@ -194,10 +194,10 @@ $statusClasses = [
                     </td>
                     <td>{{date('Y-m-d',strtotime($row->created_at))}}</td>
                     <td>
-                        <a
-                            href="{{ url('applications/' . $row->model_id) . '?type=' . base64_encode($row->model_name) }}">
+                        <a href="{{ route('applications.view', ['id' => $row->model_id]) }}?type={{ base64_encode($row->model_name) }}">
                             <button type="button" class="btn btn-primary px-5">View</button>
                         </a>
+                        
 
                     </td>
                 </tr>

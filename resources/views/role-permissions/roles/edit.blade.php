@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h6 class="mb-0 text-uppercase tabular-record_font pb-4">Edit role details</h6>
-                            <form action="{{ url('roles/'.$role->id) }}" method="POST" >
+                        <form action="{{ route('roles.update', $role->id) }}" method="POST">
                             @csrf
                             @method('PUT')
                                 <div class="row align-items-end">

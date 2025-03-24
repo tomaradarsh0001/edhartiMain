@@ -75,7 +75,9 @@
         var targetSelect = $('#block')
         targetSelect.html('<option>Select</option>');
         targetSelect.selectpicker('refresh');
-        var reponseUrl = leaseHoldOnly ? "{{url('/rgr/blocks-in-colony')}}" + '/' + selectedColonyId + '/' + 1 : "{{url('/rgr/blocks-in-colony')}}" + '/' + selectedColonyId + '/' + 0;
+        var reponseUrl = "{{ route('blocksInColony', [':colonyId', ':leaseHoldOnly']) }}"
+        .replace(':colonyId', selectedColonyId)
+        .replace(':leaseHoldOnly', leaseHoldOnly ? 1 : 0);
         if (selectedColonyId != "") {
             $.ajax({ // call for subtypes for selected property types
                 url: reponseUrl,
@@ -105,7 +107,10 @@
         var targetSelect = $('#plot')
         targetSelect.html('<option value="">Select</option>')
         if (selectedColonyId != "") {
-            var reponseUrl = leaseHoldOnly ? "{{url('/rgr/properties-in-block')}}" + '/' + selectedColonyId + '/' + selectedBlock + '/' + 1 : "{{url('/rgr/properties-in-block')}}" + '/' + selectedColonyId + '/' + selectedBlock
+            var reponseUrl = "{{ route('propertiesInBlock', [':colonyId', ':blockId', ':leaseHoldOnly']) }}"
+            .replace(':colonyId', selectedColonyId)
+            .replace(':blockId', selectedBlock)
+            .replace(':leaseHoldOnly', leaseHoldOnly ? 1 : '');
             console.log(reponseUrl);
             $.ajax({ // call for subtypes for selected property types
                 url: reponseUrl,

@@ -38,10 +38,10 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-end py-3">
-                <a href="{{ url('logistic/items') }}">
+                <a href="{{ route('logistic.index') }}">
                     <button type="button" class="btn btn-danger px-2 mx-2">← Back</button>
                 </a>
-                <!-- <a href="{{ url('logistic/category') }}">
+                <!-- <a href="{{ route('category.index') }}">
                                     <button type="button" class="btn btn-primary px-2">+ Add Category</button>
                                 </a> -->
             </div>
@@ -66,7 +66,7 @@
                 <div class="form-row m-3">
                     <div class="form-group col-md-6">
                         <label class="form-label" for="category_id">Category:</label>
-                        <a href="{{ url('logistic/category/') }}" class="add-btn">&plus;&nbsp;Add
+                        <a href="{{ route('category.index') }}" class="add-btn">&plus;&nbsp;Add
                             Category</a>
                         <select id="category_id" name="category_id" class="form-select mb-3" aria-label="Select">
                             <option value="" selected>Select</option>

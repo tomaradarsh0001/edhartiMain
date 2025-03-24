@@ -384,7 +384,7 @@
         }
         $.ajax({
             type: "get",
-            url: `{{url('rgr/send-draft')}}` + '/' + id,
+            let url = `{{ route('sendDraft', ['rgrId' => '${id}']) }}`;
             success: response => {
                 if (response.status == 'success') {
                     showSuccess(response.message);

@@ -385,7 +385,7 @@
     if (selectedOldPropertyId && selectedOldPropertyId != "") {
       $.ajax({
         type: "get",
-        url: "{{url('/demand/getExistingPropertyDemand')}}" + "/" + selectedOldPropertyId,
+        url: "{{ route('getExistingPropertyDemand', ':oldPropertyId') }}".replace(':oldPropertyId', selectedOldPropertyId),
         success: function(response) {
           if (response.status) {
             if (response.data && (response.data.demand || (response.data.dues && response.data.dues > 0))) {
@@ -485,7 +485,7 @@
       let redirectMessage = `<h6>Redirecting to edit page</h6>`;
       $('#oldDemandDetails').after(redirectMessage);
       setTimeout(() => {
-        window.location.href = "{{url('/demand/edit')}}" + '/' + editDemandId;
+        window.location.href = "{{ route('EditDemand', ':demandId') }}".replace(':demandId', editDemandId);
       }, 1000);
     } else {
       $("#confirmNewDemandModal").modal("hide");

@@ -107,7 +107,7 @@
     function getPropertyDetails(propertyId) {
         $.ajax({
             type: 'get',
-            url: "{{url('unearned-increase/property-details')}}" + '/' + propertyId,
+            url: "{{ route('calculateUnearnedIncreaseForProperty', ':propertyId') }}".replace(':propertyId', propertyId),
 
             success: response => {
                 if (response.status == 'error') {

@@ -94,7 +94,7 @@
                                     <td>
                                         <a href="{{ route('purchase.edit', $purchase->purchase_id) }}"
                                             class="btn btn-primary px-4">Edit</a>
-                                        <!-- <a href="{{ url('inventory/purchase/' . $purchase->purchase_id . '/delete') }}" class="btn btn-sm btn-danger">Delete</a> -->
+                                        <!-- <a href="{{ route('inventory/purchase/' . $purchase->purchase_id . '/delete') }}" class="btn btn-sm btn-danger">Delete</a> -->
                                     </td>
                                 @endcan
                             </tr>

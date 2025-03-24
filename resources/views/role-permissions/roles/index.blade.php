@@ -10,7 +10,7 @@
                     <div class="card-body">
                     <div class="d-flex justify-content-end">
                         @haspermission('create role')
-                            <a href="{{ url('roles/create') }}"><button class="btn btn-primary">+ Add Role</button></a>
+                        <a href="{{ route('roles.create') }}" class="btn btn-primary">+ Add Role</a>
                         @endhaspermission
                     </div>
                         <h6 class="mb-0 text-uppercase tabular-record_font pb-4">Roles</h6>
@@ -30,15 +30,22 @@
 											<td>
                                                 <div class="d-flex gap-3">
                                                     @haspermission('update role')
-                                                        <a href="{{ url('roles/'.$role->id.'/edit') }}"><button type="button" class="btn btn-primary px-5">Edit</button></a>
+                                                        <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-primary px-5">Edit</a>
                                                     @endhaspermission
+                                                
                                                     @haspermission('delete role')
-                                                        <a href="{{ url('roles/'.$role->id.'/delete') }}"> <button type="button" class="btn btn-danger px-5">Delete</button></a>
+                                                        <form action="{{ route('roles.destroy', $role->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this role?');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger px-5">Delete</button>
+                                                        </form>
                                                     @endhaspermission
+                                                
                                                     @haspermission('create role')
-                                                        <a href="{{ url('roles/'.$role->id.'/give-permissions') }}"> <button type="button" class="btn btn-warning px-5">Add / Edit Role Permission</button></a>
+                                                    <a href="{{ route('roles.givePermission', $role->id) }}" class="btn btn-warning px-5">Add / Edit Role Permission</a>
                                                     @endhaspermission
                                                 </div>
+                                                
                                             </td>
 										</tr>
 										@endforeach

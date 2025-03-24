@@ -51,7 +51,15 @@ use App\Http\Controllers\Admin\{
     ApplicationController as AdminApplicationController
 };
 use App\Http\Controllers\application\ConversionController as ApplicationConversionController;
+Route::prefix('edharti')->group(function () {
 
+    Route::get('test', function () {
+       return response()->json([
+           'message' => 'API is working!',
+           'status' => 200
+       ]);
+   });
+   
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -356,16 +364,18 @@ Route::middleware('auth')->group(function () {
         //Roles
         Route::resource('roles', App\Http\Controllers\RoleController::class);
         Route::get('roles/{roleId}/delete', [App\Http\Controllers\RoleController::class, 'destroy']);
-        Route::get('roles/{roleId}/give-permissions', [App\Http\Controllers\RoleController::class, 'addPermissionToRole']);
-        Route::put('roles/{roleId}/give-permissions', [App\Http\Controllers\RoleController::class, 'givePermissionToRole']);
+        Route::get('roles/{roleId}/give-permissions', [App\Http\Controllers\RoleController::class, 'addPermissionToRole'])->name('roles.addPermission');;
+        Route::put('roles/{roleId}/give-permissions', [App\Http\Controllers\RoleController::class, 'givePermissionToRole'])->name('roles.givePermission');;
 
         //Users
         Route::resource('users', App\Http\Controllers\UserController::class);
         Route::get('getUserList', [App\Http\Controllers\UserController::class, 'getUserList'])->name('getUserList');
-        Route::get('users/{userId}/delete', [App\Http\Controllers\UserController::class, 'destroy'])->middleware('permission:delete user');
+        Route::get('users/delete/{userId}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user.delete')->middleware('permission:delete user');
         Route::get('users/{id}/status', [App\Http\Controllers\UserController::class, 'status'])->name('user.status')->middleware('permission:status.user');
-        Route::get('users/{id}/update-user-details', [App\Http\Controllers\UserController::class, 'updateUserDetails'])->name('user.details.update');
-        Route::put('/users/{user}/update', [App\Http\Controllers\UserController::class, 'updateUser'])->name('user.update');
+        Route::get('users/update-user-details/{id}', [App\Http\Controllers\UserController::class, 'updateUserDetails'])->name('user.details.update');
+        Route::put('/users/permission/update/{id}', [App\Http\Controllers\UserController::class, 'updateUser'])->name('user.permission.update');
+        Route::get('/users/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');
+
         
         // Routes for showing unalloted recores By Lalit Tiwari (10/Jan/2025)
         Route::get('/reports/detailed-report', [ReportController::class, 'detailedReport'])->name('detailedReport');
@@ -625,3 +635,6 @@ Route::post('/dashboard/colony-filter', [DashboardController::class, 'dashbordCo
 //Added the route for redirection URL of Bharatkosh ---Amita [14-01-2025]
 //Route::get('/payment-response', [PaymentController::class, 'paymentResponse'])->name('paymentResponse');
 Route::match(['get', 'post'], '/payment-response', [PaymentController::class, 'paymentResponse'])->name('paymentResponse'); //Updated the method to match --Amita [20-02-2025]
+
+
+});

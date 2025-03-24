@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h6 class="mb-0 text-uppercase tabular-record_font pb-4">Edit permission details</h6>
-                            <form action="{{ url('permissions/'.$permission->id) }}" method="POST" >
+                            <form action="{{ route('permissions.update', $permission->id) }}" method="POST" >
                             @csrf
                             @method('PUT')
                                 <div class="row align-items-end">

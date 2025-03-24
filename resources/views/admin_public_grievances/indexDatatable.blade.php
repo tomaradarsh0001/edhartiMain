@@ -50,9 +50,9 @@
     <div class="card-body">
         <div class="d-flex justify-content py-3">
             @can('add.grievance')
-                <a href="{{ url('/admin-grievances') }}">
-                    <button type="button" class="btn btn-primary py-2">+ Add Grievance</button>
-                </a>
+            <a href="{{ route('grievance.create') }}">
+                <button type="button" class="btn btn-primary py-2">+ Add Grievance</button>
+            </a>            
             @endcan
         </div>
         <table id="grievancesTable" class="display nowrap" style="width:100%">

@@ -33,8 +33,9 @@
             <div class="d-flex justify-content-between align-items-center">
                 <h5 class="mb-4 pt-3 text-decoration-underline text-uppercase">Property Details</h5>
                 @haspermission('edit.child')
-                <a href="{{ url('property-details/' . $childData->id . '/child-edit') }}"><button type="button"
-                        class="btn btn-primary px-5">Edit</button></a>
+                <a href="{{ route('editChildDetails', ['property' => $childData->id]) }}">
+                    <button type="button" class="btn btn-primary px-5">Edit</button>
+                </a>                
                 @endhaspermission
             </div>
             <div class="container pb-3">
@@ -44,9 +45,11 @@
                         <table class="table table-bordered">
                             <tbody>
                                 <tr>
-                                    <td><b>New Property Id: </b> <a
-                                            href="{{ url('property-details/' . $viewDetails->id . '/view') }}">{{$viewDetails->unique_propert_id}}</a>
-                                    </td>
+                                    <td><b>New Property Id: </b> 
+                                        <a href="{{ route('viewDetails', ['property' => $viewDetails->id]) }}">
+                                            {{ $viewDetails->unique_propert_id }}
+                                        </a>
+                                    </td>                                    
                                     <td><b>Old Property Id: </b> {{$viewDetails->old_propert_id}}</td>
                                 </tr>
                                 <tr>

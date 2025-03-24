@@ -8,15 +8,18 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex pb-5 justify-content-between">
-                            <a href="{{ url('users/create') }}"><button class="btn btn-primary">+ Add User</button></a>
-                            <div class="d-flex gap-3">
+                            <a href="{{ route('users.create') }}" class="btn btn-primary">+ Add User</a>
+
+                            <div class="d-flex gap-3 mt-2">
                                 @haspermission('view role')
-                                    <a href="{{ url('roles') }}"><button class="btn btn-info">Roles</button></a>
+                                    <a href="{{ route('roles.index') }}" class="btn btn-info">Roles</a>
                                 @endhaspermission
+                                
                                 @haspermission('view permission')
-                                    <a href="{{ url('permissions') }}"><button class="btn btn-warning">Permissions</button></a>
+                                    <a href="{{ route('permissions.index') }}" class="btn btn-warning">Permissions</a>
                                 @endhaspermission
                             </div>
+                            
                         </div>
                         <h6 class="mb-0 text-uppercase tabular-record_font pb-4">Users</h6>
                         <table class="table mb-0">
@@ -60,13 +63,15 @@
                                             </td>
 											<td>
                                                 <div class="d-flex gap-3">
-                                                @haspermission('update user')
-                                                    <a href="{{ url('users/'.$user->id.'/edit') }}"><button type="button" class="btn btn-primary px-5">Edit</button></a>
-                                                @endhaspermission
-                                                @haspermission('delete user')
-                                                    <a href="{{ url('users/'.$user->id.'/delete') }}"> <button type="button" class="btn btn-danger px-5">Delete</button></a>
-                                                @endhaspermission
+                                                    @haspermission('update user')
+                                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary px-5">Edit</a>
+                                                    @endhaspermission
+                                                
+                                                    @haspermission('delete user')
+                                                        <a href="{{ route('users.delete', $user->id) }}" class="btn btn-danger px-5">Delete</a>
+                                                    @endhaspermission
                                                 </div>
+                                                
                                             </td>
 										</tr>
 										@endforeach

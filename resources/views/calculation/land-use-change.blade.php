@@ -144,7 +144,7 @@
     function getPropertyLandUseChangeOptions(propertyId) {
         $.ajax({
             type: 'get',
-            url: "{{url('land-use-change/property-type-options')}}" + '/' + propertyId,
+            url: "{{ route('propertyTypeOptions', ':propertyId') }}".replace(':propertyId', propertyId),
 
             success: response => {
                 $('#change-to-select').toggleClass('d-none', response.status !== 'success');

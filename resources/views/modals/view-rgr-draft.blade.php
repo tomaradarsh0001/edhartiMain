@@ -18,14 +18,14 @@
          let rgrId;
          const viewDraft = id => {
              rgrId = id;
-             let url = "{{url('/rgr/view-draft')}}" + '/' + rgrId;
+             let url = "{{ route('viewDraft', ['rgrId' => 'RGR_ID']) }}".replace('RGR_ID', rgrId);
              $('.modal-body').load(url);
              $('#viewDraftModal').modal('show')
          }
          const saveAsPdf = () => {
              $.ajax({
                  type: "get",
-                 url: "{{url('rgr/save-as-pdf')}}" + '/' + rgrId,
+                 let url = "{{ route('saveAsPdf', ['id' => 'RGR_ID']) }}".replace('RGR_ID', rgrId);
                  success: response => {
 
                      setTimeout(() => {

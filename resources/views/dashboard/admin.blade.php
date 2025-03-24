@@ -1253,7 +1253,9 @@ $number_of_colonies = getMisDoneColoniesCount();
 
     /*** new code by Nitin ---  */
     const getTabData = (tabId) => {
-        var ajaxUrl = "{{ url('dashboard/property-type-data')}}" + '/' + tabId + (colony_id ? `/${colony_id}` : '');
+        var ajaxUrl = "{{ route('propertyTypeDetails', [':typeId', ':colonyId']) }}"
+    .replace(':typeId', tabId)
+    .replace(':colonyId', colony_id ? colony_id : '');
         $.ajax({
             type: 'get',
             url: ajaxUrl,
@@ -1405,14 +1407,7 @@ $number_of_colonies = getMisDoneColoniesCount();
         }
     })
 
-    /* $('.view-list').click(function() {
-        let propertyType = $(this).data('propertyType');
-        filterData = {
-            "property_type[]": propertyType,
-        }
-        let openUrl = "{{url('/dashboard/tileList')}}" + `/${propertyType} ${colony_id ? '/'+colony_id:''}`
-        window.open(openUrl, '_blank').focus();
-    }) */
+
     $('.view-list').click(function() {
         let linkEnabled = '<?= $isPublic == true ? 0 : 1 ?>';
         if (linkEnabled == '1') {

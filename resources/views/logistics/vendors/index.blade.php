@@ -35,10 +35,10 @@
         <div class="card-body">
 
             <div class="d-flex justify-content-between py-3">
-                <a href="{{ url('logistic/vendor/add') }}">
+                <a href="{{ route('supplier.create') }}">
                     <button type="button" class="btn btn-primary px-2">+ Add Vendors</button>
                 </a>
-                <a href="{{ url('logistic/purchase') }}">
+                <a href="{{ route('purchase.index') }}">
                     <button type="button" class="btn btn-danger px-2 mx-2">← Back</button>
                 </a>
             </div>
@@ -85,9 +85,9 @@
                             <td>
                                 @can('vendors.action')
                                     <div class="d-flex gap-3">
-                                        <a href="{{ url('logistic/vendor/' . $item->id . '/edit') }}"><button type="button"
+                                        <a href="{{ route('supplier.edit', ['id' => $item->id]) }}"><button type="button"
                                                 class="btn btn-primary px-5">Edit</button></a>
-                                        {{-- <a href="{{ url('/logistic/vendor/' . $item->id . '/delete') }}"> <button type="button"
+                                        {{-- <a href="{{ route('/logistic/vendor/' . $item->id . '/delete') }}"> <button type="button"
                                             class="btn btn-danger px-5">Delete</button></a> --}}
                                     </div>
                                 @endcan

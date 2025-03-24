@@ -589,7 +589,7 @@ class ApplicationController extends Controller
 
             // Prepare actions
             $action = '<div class="d-flex gap-2">';
-            $action .= '<a href="' . url('applications/' . $application->id) . '?type=' . $model . '">
+            $action .= '<a href="' . route('applications.view', ['id' => $application->id, 'type' => $model]) . '">
                             <button type="button" class="btn btn-primary px-5">View</button>
                         </a>
                         <button type="button" class="btn btn-success" onclick="getFileMovement(\'' . $application->application_no . '\', this)">
@@ -1035,7 +1035,7 @@ class ApplicationController extends Controller
 
             // Prepare actions
             // $action = '<div class="d-flex gap-2">
-            //     <a href="' . url('applications/' . $application->id) . '?type=' . $model . '">
+            //     <a href="' . route('applications/' . $application->id) . '?type=' . $model . '">
             //         <button type="button" class="btn btn-primary px-5">View</button>
             //     </a>
             //    <button type="button" class="btn btn-success" onclick="getFileMovement(\'' . $application->application_no . '\', this)">
@@ -1045,7 +1045,7 @@ class ApplicationController extends Controller
 
             // Prepare actions
             $action = '<div class="d-flex gap-2">';
-            $action .= '<a href="' . url('applications/' . $application->id) . '?type=' . $model . '">
+            $action .= '<a href="' . route('applications/' . $application->id) . '?type=' . $model . '">
                             <button type="button" class="btn btn-primary px-5">View</button>
                         </a>
                         <button type="button" class="btn btn-success" onclick="getFileMovement(\'' . $application->application_no . '\', this)">
@@ -1393,7 +1393,7 @@ class ApplicationController extends Controller
 
             // Prepare actions
             // $action = '<div class="d-flex gap-2">
-            //     <a href="' . url('applications/' . $application->id) . '?type=' . $model . '">
+            //     <a href="' . route('applications/' . $application->id) . '?type=' . $model . '">
             //         <button type="button" class="btn btn-primary px-5">View</button>
             //     </a>
             //    <button type="button" class="btn btn-success" onclick="getFileMovement(\'' . $application->application_no . '\', this)">
@@ -1403,7 +1403,7 @@ class ApplicationController extends Controller
 
             // Prepare actions
             $action = '<div class="d-flex gap-2">';
-            $action .= '<a href="' . url('applications/' . $application->id) . '?type=' . $model . '">
+            $action .= '<a href="' . route('applications/' . $application->id) . '?type=' . $model . '">
                             <button type="button" class="btn btn-primary px-5">View</button>
                         </a>
                         <button type="button" class="btn btn-success" onclick="getFileMovement(\'' . $application->application_no . '\', this)">
@@ -1508,7 +1508,7 @@ class ApplicationController extends Controller
 
                 }
                 //for logs - SOURAV CHAHAN (18/Nov/2024) 
-                $actionLink = url('applications/' . $id) . '?type=' . $request->type;
+                $actionLink = route('applications.view', ['id' => $id]) . '?type=' . $request->type;
                 UserActionLogHelper::UserActionLog(
                     'Application View',
                     $actionLink,
@@ -2465,7 +2465,7 @@ class ApplicationController extends Controller
 
             //for logs - SOURAV CHAHAN (18/Nov/2024) 
             $decodedModel = base64_encode($application->model_name);
-            $actionLink = url('applications/' . $application->model_id) . '?type=' . $decodedModel;
+            $actionLink = route('applications.view', ['id' => $application->model_id]) . '?type=' . urlencode($decodedModel);
             UserActionLogHelper::UserActionLog(
                 'Application ' . $action,
                 $actionLink,
@@ -2734,7 +2734,10 @@ class ApplicationController extends Controller
                 }
 
                 // Generate Encoded Meeting Link
-                $meetingLink = url('/applicant/appointment/' . base64_encode($request->applicationNo) . '/' . base64_encode(strtotime(now())));
+                $meetingLink = route('applicant.appointment', [
+                    'applicationId' => base64_encode($request->applicationNo),
+                    'timestamp' => base64_encode(strtotime(now()))
+                ]);
                 $clickableMeetingLink = '<a href="' . $meetingLink . '" target="_blank">Click Here</a>';
                 $isApplicationAppointmentLink = ApplicationAppointmentLink::where('application_no', $request->applicationNo)
                     ->orderBy('created_at', 'desc')->first();
@@ -3439,8 +3442,8 @@ class ApplicationController extends Controller
  
              // Prepare actions
              $action = '<div class="d-flex gap-2">';
-             $action .= '<a href="' . url('applications/' . $application->id) . '?type=' . $model . '">
-                             <button type="button" class="btn btn-primary px-5">View</button>
+             $action .= '<a href="' . route('applications.view', ['id' => $application->id]) . '?type=' . urlencode($model) . '">
+             <button type="button" class="btn btn-primary px-5">View</button>
                          </a>
                          <button type="button" class="btn btn-success" onclick="getFileMovement(\'' . $application->application_no . '\', this)">
                              File Movement
@@ -4337,7 +4340,7 @@ class ApplicationController extends Controller
                     }
 
                     //For logs - SOURAV CHAUHAN (13/Dec/2024) 
-                    $actionLink = url('applications/' . $id . '/start-proof-reading') . '?type=' . $request->type;
+                    $actionLink = route('startProofReading', ['id' => $id]) . '?type=' . urlencode($request->type);
                     UserActionLogHelper::UserActionLog(
                         'Start Application Proof Reading',
                         $actionLink,

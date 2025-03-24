@@ -985,7 +985,7 @@ foreach ($barChartData as $key => $row) {
 
     /*** new code by Nitin ---  */
     const getTabData = (tabId) => {
-        var ajaxUrl = "{{ url('dashboard/property-type-data')}}" + '/' + tabId + (colony_id ? `/${colony_id}` : '');
+        var ajaxUrl = "{{ route('propertyTypeDetails', ['typeId' => '" + tabId + "' ]) }}" + (colony_id ? '/' + colony_id : '');
         $.ajax({
             type: 'get',
             url: ajaxUrl,

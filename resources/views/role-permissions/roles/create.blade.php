@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h6 class="mb-0 text-uppercase tabular-record_font pb-4">Add Role details</h6>
-                            <form action="{{url('roles')}}" method="POST" >
+                            <form action="{{route('roles.store')}}" method="POST" >
                                 @csrf
                                 <div class="row align-items-end">
                                         <div class="col-12 col-lg-4">

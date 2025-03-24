@@ -48,7 +48,7 @@
                     @endcanany
 
                     <!-- @can('upload.excel') -->
-                    <a href="{{ url('import') }}" class="tablinks" onmouseenter="openMegaMenu(event, 'UploadExcel')">
+                    <a href="{{ route('import.form') }}" class="tablinks" onmouseenter="openMegaMenu(event, 'UploadExcel')">
                         <div class="col mb-1 megamenu-item">
                             <div class="app-box mx-auto text-white">
                                 <i class='bx bx-upload'></i>
@@ -68,16 +68,16 @@
 
                         </div>
                     </a>
-
-                    <a href="{{ url('user-actions-logs') }}" class="tablinks"
-                        onmouseenter="openMegaMenu(event, 'UserActionLogs')">
-                        <div class="col mb-1 megamenu-item">
-                            <div class="app-box mx-auto text-white">
-                                <i class="bx bx-group"></i>
-                            </div>
-                            <div class="app-title">Action Log History</div>
+                    <a href="{{ route('actionLogListings') }}" class="tablinks"
+                    onmouseenter="openMegaMenu(event, 'UserActionLogs')">
+                    <div class="col mb-1 megamenu-item">
+                        <div class="app-box mx-auto text-white">
+                            <i class="bx bx-group"></i>
                         </div>
-                    </a>
+                        <div class="app-title">Action Log History</div>
+                    </div>
+                </a>
+                
                 </div>
             </div>
             <div class="col-8">
@@ -88,9 +88,9 @@
                                 <div class="col-lg-4">
                                     <h5>RBAC</h5>
                                     <ul class="nav-links">
-                                        <li><a href="{{ url('roles') }}"><i class='bx bx-chevron-right'></i> Role</a></li>
-                                        <li><a href="{{ url('permissions') }}"><i class='bx bx-chevron-right'></i> Permissions</a></li>
-                                        <li><a href="{{ url('users') }}"><i class='bx bx-chevron-right'></i> Manage Users</a></li>
+                                        <li><a href="{{ route('roles.index') }}"><i class='bx bx-chevron-right'></i> Role</a></li>
+                                        <li><a href="{{ route('permissions.index') }}"><i class='bx bx-chevron-right'></i> Permissions</a></li>
+                                        <li><a href="{{ route('users.index') }}"><i class='bx bx-chevron-right'></i> Manage Users</a></li>
                                         
                                     </ul>
                                 </div>
@@ -125,26 +125,26 @@
                                 <div class="col-lg-4">
                                     <h5>Product</h5>
                                     <ul class="nav-links">
-                                        <li><a href="{{ url('logistic/category') }}"><i class='bx bx-chevron-right'></i> Add Category</a></li>
-                                        <li><a href="{{ url('logistic/items') }}"><i class='bx bx-chevron-right'></i> Add Items</a></li>
-                                        <li><a href="{{ url('logistic/vendor') }}"><i class='bx bx-chevron-right'></i> Supplier/Vendor List</a></li>
-                                        <li><a href="{{ url('logistic/purchase') }}"><i class='bx bx-chevron-right'></i> Purchase</a></li>
+                                        <li><a href="{{ route('category.index') }}"><i class='bx bx-chevron-right'></i> Add Category</a></li>
+                                        <li><a href="{{ route('logistic.index') }}"><i class='bx bx-chevron-right'></i> Add Items</a></li>
+                                        <li><a href="{{ route('supplier.index') }}"><i class='bx bx-chevron-right'></i> Supplier/Vendor List</a></li>
+                                        <li><a href="{{ route('purchase.index') }}"><i class='bx bx-chevron-right'></i> Purchase</a></li>
                                     </ul>
                                 </div>
                                 @haspermission('app.settings')
                                 <div class="col-lg-4">
                                     <h5>Issues</h5>
                                     <ul class="nav-links">
-                                        <li><a href="{{ url('/logistic/issued-item') }}"><i class='bx bx-chevron-right'></i> Issue an Item</a></li>
-                                        <li><a href="{{ url('/logistic/requested-items') }}"><i class='bx bx-chevron-right'></i> Issue Requests</a></li>
+                                        <li><a href="{{ route('issued_item.create') }}"><i class='bx bx-chevron-right'></i> Issue an Item</a></li>
+                                        <li><a href="{{ route('requested_item.index') }}"><i class='bx bx-chevron-right'></i> Issue Requests</a></li>
                                     </ul>
                                 </div>
                                 @endhaspermission
                                 <div class="col-lg-4">
                                     <h5>Stock</h5>
                                     <ul class="nav-links">
-                                        <li><a href="{{ url('logistic/stock') }}"><i class='bx bx-chevron-right'></i> Available Stock</a></li>
-                                        <li><a href="{{ url('logistic/history') }}"><i class='bx bx-chevron-right'></i> Stock History</a></li>
+                                        <li><a href="{{ route('purchaseStock.index') }}"><i class='bx bx-chevron-right'></i> Available Stock</a></li>
+                                        <li><a href="{{ route('purchaseHistory.index') }}"><i class='bx bx-chevron-right'></i> Stock History</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -152,12 +152,12 @@
                         <div id="Rev" class="tabcontent">
                             <ul class="nav-links">
                                 @can('create.rgr')
-                                <li><a href="{{ url('rgr') }}"><i class='bx bx-chevron-right'></i> Calculate RGR</a></li>
+                                <li><a href="{{ route('rgr') }}"><i class='bx bx-chevron-right'></i> Calculate RGR</a></li>
                                 <li><a href="{{route('completeList') }}"><i class='bx bx-chevron-right'></i>List of Revised GR</a>
                                 </li>
                                 @endcan
                                 @can('view.rgr.list')
-                                <li><a href="{{ url('rgr/list') }}"><i class='bx bx-chevron-right'></i> Detailed RGR List </a></li>
+                                <li><a href="{{ route('rgrList') }}"><i class='bx bx-chevron-right'></i> Detailed RGR List </a></li>
                                 @endcan
                             </ul>
                         </div>
@@ -167,14 +167,14 @@
                                 <li><a href="{{route('colony.merger.create')}}"><i class='bx bx-chevron-right'></i> Property Merging</a></li>
                             </ul>
                         </div>
-                        <!-- <div id="LDORate" class="tabcontent">
+                        {{-- <div id="LDORate" class="tabcontent">
                         </div>
                         <div id="CircleStore" class="tabcontent">
                             <ul class="nav-links">
-                                <li><a href="{{ url('import-lndo-land-rates') }}"><i class='bx bx-chevron-right'></i> L&DO Land Rate Upload</a></li>
-                                <li><a href="{{ url('import-circle-rates') }}"><i class='bx bx-chevron-right'></i> Circle Rate Upload</a></li>
+                                <li><a href="{{ route('import-lndo-land-rates') }}"><i class='bx bx-chevron-right'></i> L&DO Land Rate Upload</a></li>
+                                <li><a href="{{ route('import-circle-rates') }}"><i class='bx bx-chevron-right'></i> Circle Rate Upload</a></li>
                             </ul>
-                        </div> -->
+                        </div> --}}
                     </div>
                 </div>
             </div>

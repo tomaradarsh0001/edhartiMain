@@ -40,7 +40,7 @@
         <div class="col pt-3">
             <div class="card">
                 <div class="card-body">
-                    <form id="userForm" action="{{ url('users') }}" method="POST" onsubmit="submitForm(event)">
+                    <form id="userForm" action="{{ route('users.store') }}" method="POST" onsubmit="submitForm(event)">
                         @csrf
                         <div class="row">
                             <div class="col-12 col-lg-4 pb-4">

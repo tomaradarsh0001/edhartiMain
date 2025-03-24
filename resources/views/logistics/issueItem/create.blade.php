@@ -35,7 +35,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-end py-3">
-                <a href="{{ url('/logistic/requested-items') }}">
+                <a href="{{ route('requested_item.index') }}">
                     <button type="button" class="btn btn-danger px-2 mx-2">← Back</button>
                 </a>
             </div>

@@ -223,7 +223,7 @@
 
                     /** code modified by Nitin to fix - viewMoreUrl containing url for only once. it was not updating for second time onwards */
                     let viewMoreUrl = "{{ route('applications.movements', ['appNo' => '__appNo__']) }}";
-                    // let viewMoreUrl = "{{ url('applications') }}" + `/${applicationNo}/movement`;
+                    // let viewMoreUrl = "{{ route('applications') }}" + `/${applicationNo}/movement`;
 
                     viewMoreUrl = viewMoreUrl.replace('__appNo__', applicationNo);
                     //$('a[href=""]').attr('href', viewMoreUrl);

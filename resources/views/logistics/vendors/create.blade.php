@@ -25,7 +25,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-end py-3">
-                <a href="{{ url('logistic/vendor') }}">
+                <a href="{{ route('supplier.index') }}">
                     <button type="button" class="btn btn-danger px-2 mx-2">← Back</button>
                 </a>
             </div>

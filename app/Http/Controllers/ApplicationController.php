@@ -945,8 +945,15 @@ class ApplicationController extends Controller
             $model = base64_encode($application->model_name);
 
             // Prepare actions
-            $action = '<a href="' . url('applications/draft/' . $application->id) . '?type=' . $model . '"><button type="button" class="btn btn-primary px-5">Complete Application</button></a> <a href="javascript:void(0)" ><button type="button" class="btn btn-danger px-5" onclick="deleteConfirmModal(\'Are you sure to delete ' . $appliedFor . ' application?\',\'' . base64_encode($application->model_name) . '\',\'' . base64_encode($application->id) . '\')">Delete Draft</button></a>';
-            $nestedData['action'] = $action;
+            $action = '<a href="' . route('getApplication.draft', ['id' => $application->id]) . '?type=' . $model . '">
+            <button type="button" class="btn btn-primary px-5">Complete Application</button>
+        </a> 
+        <a href="javascript:void(0)">
+            <button type="button" class="btn btn-danger px-5" onclick="deleteConfirmModal(\'Are you sure to delete ' . $appliedFor . ' application?\',\'' . base64_encode($application->model_name) . '\',\'' . base64_encode($application->id) . '\')">
+                Delete Draft
+            </button>
+        </a>';
+        $nestedData['action'] = $action;
             $nestedData['created_at'] = Carbon::parse($application->created_at)
                                         ->setTimezone('Asia/Kolkata')
                                         ->format('d M Y H:i:s');
@@ -1814,17 +1821,23 @@ class ApplicationController extends Controller
             $model = base64_encode($application->model_name);
             // Prepare actions
             $action =  '<div class="d-flex gap-3">';
-            $action .= '<a href="' . url('applications/' . $application->id) . '?type=' . $model . '">
-                            <button type="button" class="btn btn-primary px-5">View</button>
-                        </a>';
-            if($itemName === 'New'){
-                $action .= '
-                <button type="button" class="btn btn-danger px-3" onclick="withdrawApplication(\'' . $application->application_no . '\')">Withdraw Application</button>
-                ';
+            $action .= '<a href="' . route('applications.view', ['id' => $application->id]) . '?type=' . $model . '">
+            <button type="button" class="btn btn-primary px-5">View</button>
+            </a>';
+
+            // Withdraw Button (if $itemName is "New")
+            if ($itemName === 'New') {
+            $action .= '<button type="button" class="btn btn-danger px-3" onclick="withdrawApplication(\'' . $application->application_no . '\')">
+                            Withdraw Application
+                        </button>';
             }
+
+            // Edit Button (if $editFlag is true)
             if ($editFlag == true) {
-                $objectedAction = base64_encode('objectApplication');
-                $action .= '<a href="' . url('applications/edit/' . $application->id) . '?type=' . $model . '&action=' . $objectedAction . '"><button type="button" class="btn btn-primary px-3">Edit</button></a>';
+            $objectedAction = base64_encode('objectApplication');
+            $action .= '<a href="' . route('getApplication.edit', ['id' => $application->id]) . '?type=' . $model . '&action=' . $objectedAction . '">
+                            <button type="button" class="btn btn-primary px-3">Edit</button>
+                        </a>';
             }
             $action .=  '</div>';
             $nestedData['action'] = $action;

@@ -76,7 +76,7 @@
                         <div class="form-group col-md-6">
                             <label class="form-label" for="vendor_supplier_id">Vendor Supplier Name: <span
                                     class="text-danger">*</span></label>
-                            <a href="{{ url('logistic/vendor/') }}" class="add-btn">&plus;&nbsp;Add Vendors</a>
+                            <a href="{{ route('supplier.index') }}" class="add-btn">&plus;&nbsp;Add Vendors</a>
                             <select id="vendor_supplier_id" name="vendor_supplier_id" class="form-select mb-3"
                                 aria-label="Default select example">
                                 <option value="">Select</option>
